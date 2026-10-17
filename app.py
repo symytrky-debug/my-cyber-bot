@@ -9,7 +9,7 @@ if "authenticated" not in st.session_state:
     st.session_state["authenticated"] = False
 
 if not st.session_state["authenticated"]:
-    st.markdown("<h2 style='text-align: center;'>🔒 نظام المحارب السيبراني - تسجيل الدخول</h2>", unsafe_allow_layout=True)
+    st.markdown("<h2 style='text-align: center;'>🔒 نظام المحارب السيبراني - تسجيل الدخول</h2>", unsafe_allow_html=True)
     username = st.text_input("اسم المستخدم")
     password = st.text_input("كلمة المرور", type="password")
     login_button = st.button("دخول آمن")
