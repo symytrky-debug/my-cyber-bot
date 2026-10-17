@@ -275,7 +275,7 @@ if show_m:
 {"role": "user", "content": "درجتي هي 90 من 100. كيف أعرف إن كان هناك فيروسات قريبة تحاول اختراقي عبر الشبكة؟"}
 ]
 )
-st.info(response.choices.message['content'])
+st.info(response.choices[0].message['content'])
 except Exception as e:
 st.error("خطأ في الاتصال بخدمة التحليل.")
 if show_v:
