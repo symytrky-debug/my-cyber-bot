@@ -193,7 +193,7 @@ if uploaded_file is not None:
             response = openai.ChatCompletion.create(
                 model="gpt-4o",
                 messages=[
-                    {"role": "system", "content": "أنت محلل برمجيات خبيثة (Malware Analyst). قم بفحص النص أو الكود المرفق وحدد ما إذا كان يحتوي على أنشطة مشبوهة، فيروسات فدية، أو أكواد اختراق واشرح النتيجة للمستخدم باحترافية وبساطة وبشكل منسق باللغة العربية."},
+                    {"role": "system", "content": "أنت محلل برمجيات خبيثة (Malware Analyst). قم بفحص النص أو الكود المرفق وحدد ما إذا كان يحتوي على أنشطة مشبوهة، فيروسات فدية، أو أكواد اختراق واشرح النتيجة للمستخدم باحتراقية وبساطة وبشكل منسق باللغة العربية."},
                     {"role": "user", "content": f"قم بتحليل هذا المحتوى أمنياً:\n{file_details}"}
                 ]
             )
@@ -256,16 +256,20 @@ if user_support_message:
         try:
             support_response = openai.ChatCompletion.create(
                 model="gpt-4o",
-messages=[
-{"role": "system", "content": "أنت خبير دعم فني متخصص لموقع الأمن السيبراني CyberShield. مهمتك مساعدة المستخدمين في حل مشاكل الموقع التقنية بأسلوب ودود ومحترف باللغة العربية."}
-]
-)
-st.markdown(f""
-f"⚙️ رد الدعم الفني:
-{support_response.choices.message['content']}"
-f"", unsafe_allow_html=True)
-except Exception as e:
-st.error("خطأ في الاتصال بخادم الدعم الفني.")
+        try:
+            support_response = openai.ChatCompletion.create(
+                model="gpt-4o",
+                messages=[
+                    {"role": "system", "content": "أنت خبير دعم فني متخصص لموقع الأمن السيبراني CyberShield. مهمتك مساعدة المستخدمين في حل مشاكل الموقع التقنية بأسلوب ودود ومحترف باللغة العربية."},
+                    {"role": "user", "content": user_support_message}
+                ]
+            )
+            st.markdown(f"<div style='background-color: #0F172A; padding: 15px; border-radius: 8px; border: 1px solid #2563EB; margin-top: 10px;'>"
+                        f"⚙️ <b>رد الدعم الفني:</b><br>{support_response.choices.message['content']}"
+                        f"</div>", unsafe_allow_html=True)
+        except Exception as e:
+            st.error("خطأ في الاتصال بخادم الدعم الفني.")
+
 if st.sidebar.button("تسجيل الخروج Safe Logout"):
-st.session_state["authenticated"] = False
-st.rerun()
+    st.session_state["authenticated"] = False
+    st.rerun()
