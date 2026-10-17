@@ -7,12 +7,12 @@ st.set_page_config(page_title="CyberShield Premium", page_icon="🛡️", layout
 # كود CSS لتنسيق الواجهة والخلفيات والخانات والدوائر
 st.markdown("""
     <style>
-    /* Background gradient like ClassLight */
+    /* الخلفية الخارجية المتدرجة لموقع كلاس لايت */
     .stApp {
         background: linear-gradient(135deg, #0F172A 0%, #1E3A8A 50%, #3B82F6 100%);
         color: #FFFFFF;
     }
-    /* Title style - Bluish White aligned to the right side */
+    /* تعديل العنوان ليكون أبيض مزرق ومحاذي للطرف الأيمن */
     .custom-title {
         text-align: right; 
         color: #F0F9FF; 
@@ -29,7 +29,7 @@ st.markdown("""
     h2, h3, p, label, .stMarkdown {
         color: #FFFFFF !important;
     }
-    /* Interactive buttons style */
+    /* تنسيق أزرار الأوامر التفاعلية */
     div.stButton > button:first-child {
         background-color: #2563EB;
         color: white;
@@ -42,21 +42,21 @@ st.markdown("""
         border-color: #93C5FD;
         box-shadow: 0px 0px 10px #3B82F6;
     }
-    /* Neutral blue input fields */
+    /* تعديل خانات الإدخال لتصبح بلون أزرق محايد ومختلف عن الخلفية الخارجية */
     input {
         background-color: #1E293B !important; 
         color: #FFFFFF !important; 
         border: 1px solid #475569 !important; 
         border-radius: 8px !important;
     }
-    /* File uploader background styling */
+    /* لتعديل خلفية خانة رفع الملفات */
     .stFileUploader {
         background-color: #1E293B !important;
         padding: 10px;
         border-radius: 12px;
         border: 1px dashed #475569;
     }
-    /* Support section welcome box styling */
+    /* تنسيق صندوق رسالة الترحيب للدعم الفني */
     .support-welcome {
         background-color: #1E293B;
         border-right: 5px solid #3B82F6;
@@ -66,7 +66,7 @@ st.markdown("""
         color: #F0F9FF;
     }
     
-    /* Dynamic Progress Circles styling based on value color change rules */
+    /* تصميم الدوائر الرقمية الذكية التفاعلية التعبئة */
     .card-container {
         text-align: center; 
         border: 2px solid #60A5FA; 
@@ -107,7 +107,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# دالة لتوليد كود الدائرة المتدرجة الديناميكية وتغيير ألوانها تلقائياً
+# دالة لتوليد كود الدائرة المتدرجة الذكية بناءً على النسبة المئوية
 def create_gradient_circle(score):
     if score >= 80:
         gradient_color = f"conic-gradient(#10B981 0% {score}%, #34D399 {score}%, #1F2937 {score}% 100%)"
@@ -146,14 +146,14 @@ if not st.session_state["authenticated"]:
             st.error("بيانات الدخول غير صحيحة! الموقع خاص فقط.")
     st.stop()
 
-# --- بعد تسجيل الدخول الناجح يظهر الموقع بالتصميم المتدرج الجديد ---
+# --- بعد تسجيل الدخول الناجح يظهر الموقع بالكامل بالأسفل بالتصميم المتدرج الجديد ---
 
 openai.api_key = st.secrets.get("OPENAI_API_KEY", "YOUR_BACKUP_KEY")
 
 st.markdown("<div class='custom-title'>🛡️ CyberShield AI v2.0</div>", unsafe_allow_html=True)
 st.markdown("<p class='custom-subtitle'>لوحة التحكم الخاصة بمحاربة التهديدات الرقمية وفحص الثغرات</p>", unsafe_allow_html=True)
 
-# الدوائر الملونة والنسب الديناميكية
+# الدوائر الملونة والنسب
 protection_score = 85  
 malware_score = 92     
 vulnerability_score = 45 
@@ -221,7 +221,7 @@ if show_m:
             st.error("خطأ في الاتصال بخدمة التحليل.")
 
 if show_v:
-    st.subheader("⚙️ تقرير الثغرات الأمنية M المكتشفة في النظام")
+    st.subheader("⚙️ تقرير الثغرات الأمنية المكتشفة في النظام")
     with st.spinner("جاري مطابقة إصدار المتصفح بقاعدة بيانات الثغرات CVE..."):
         try:
             response = openai.ChatCompletion.create(
@@ -239,7 +239,7 @@ if show_p:
     st.subheader("📊 ملخص الحماية والخطوات القادمة")
     st.success("حالة النظام العامة مستقرة. لرفع النسبة إلى 100% يُنصح بتحديث المتصفح فوراً، وتجنب تشغيل ملفات مجهولة المصدر.")
 
-# مركز الدعم الفني والمساعدة في نهاية الصفحة بالكامل (تم إغلاق كافة الأقواس بنجاح)
+# مركز الدعم الفني والمساعدة في نهاية الصفحة بالكامل (تم ضبط الكود والمحاذاة بالكامل هنا)
 st.divider()
 st.markdown("<h3 style='text-align: right; color: #60A5FA;'>🛠️ مركز الدعم الفني والمساعدة</h3>", unsafe_allow_html=True)
 
@@ -254,4 +254,3 @@ user_support_message = st.text_input("اكتب رسالتك أو مشكلتك ا
 if user_support_message:
     with st.spinner("جاري فحص الاستفسار وتقديم الحل الفني..."):
         try:
-            support_response = openai.ChatCompletion.create()
