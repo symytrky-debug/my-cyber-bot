@@ -253,4 +253,20 @@ user_support_message = st.text_input("اكتب رسالتك أو مشكلتك ا
 
 if user_support_message:
     with st.spinner("جاري فحص الاستفسار وتقديم الحل الفني..."):
-        
+         try:
+            support_response = openai.ChatCompletion.create(
+model="gpt-4o",
+messages=[
+{"role": "system", "content": "أنت خبير دعم فني متخصص لموقع الأمن السيبراني CyberShield. مهمتك مساعدة المستخدمين في حل مشاكل الموقع التقنية بأسلوب ودود ومحترف باللغة العربية."},
+{"role": "user", "content": user_support_message}
+]
+)
+st.markdown(f""
+f"⚙️ رد الدعم الفني:
+{support_response.choices.message['content']}"
+f"", unsafe_allow_html=True)
+except Exception as e:
+st.error("خطأ في الاتصال بخادم الدعم الفني.")
+if st.sidebar.button("تسجيل الخروج Safe Logout"):
+st.session_state["authenticated"] = False
+st.rerun()
