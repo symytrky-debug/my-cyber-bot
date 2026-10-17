@@ -276,7 +276,6 @@ if show_m:
 ]
 )
 st.info(response.choices.message['content'])
-^
 except Exception as e:
 st.error("خطأ في الاتصال بخدمة التحليل.")
 if show_v:
