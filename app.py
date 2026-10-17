@@ -253,3 +253,4 @@ user_support_message = st.text_input("اكتب رسالتك أو مشكلتك ا
 
 if user_support_message:
     with st.spinner("جاري فحص الاستفسار وتقديم الحل الفني..."):
+        
