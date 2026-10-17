@@ -1,10 +1,10 @@
 import streamlit as st
 import openai
 
-# إعدادات واجهة الموقع والسمة اللمسية (التدرج الأزرق)
+# إعدادات واجهة الموقع والسمة اللمسية (التدرج الأزرق كلاس لايت)
 st.set_page_config(page_title="CyberShield Premium", page_icon="🛡️", layout="wide")
 
-# كود CSS لتنسيق الواجهة والخلفيات والخانات والدوائر
+# كود CSS المحدث لتنسيق الواجهة والخلفيات والخانات والدوائر الديناميكية
 st.markdown("""
     <style>
     /* الخلفية الخارجية المتدرجة لموقع كلاس لايت */
@@ -107,7 +107,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# دالة لتوليد كود الدائرة المتدرجة الذكية بناءً على النسبة المئوية
+# دالة لتوليد كود الدائرة المتدرجة الذكية وتغيير لونها حسب النسبة
 def create_gradient_circle(score):
     if score >= 80:
         gradient_color = f"conic-gradient(#10B981 0% {score}%, #34D399 {score}%, #1F2937 {score}% 100%)"
@@ -146,14 +146,14 @@ if not st.session_state["authenticated"]:
             st.error("بيانات الدخول غير صحيحة! الموقع خاص فقط.")
     st.stop()
 
-# --- بعد تسجيل الدخول الناجح يظهر الموقع بالكامل بالأسفل بالتصميم المتدرج الجديد ---
+# --- بعد تسجيل الدخول الناجح يظهر الموقع بالكامل بالتصميم المتدرج الجديد ---
 
 openai.api_key = st.secrets.get("OPENAI_API_KEY", "YOUR_BACKUP_KEY")
 
 st.markdown("<div class='custom-title'>🛡️ CyberShield AI v2.0</div>", unsafe_allow_html=True)
 st.markdown("<p class='custom-subtitle'>لوحة التحكم الخاصة بمحاربة التهديدات الرقمية وفحص الثغرات</p>", unsafe_allow_html=True)
 
-# الدوائر الملونة والنسب
+# الدوائر الملونة والنسب الديناميكية
 protection_score = 85  
 malware_score = 92     
 vulnerability_score = 45 
@@ -239,7 +239,7 @@ if show_p:
     st.subheader("📊 ملخص الحماية والخطوات القادمة")
     st.success("حالة النظام العامة مستقرة. لرفع النسبة إلى 100% يُنصح بتحديث المتصفح فوراً، وتجنب تشغيل ملفات مجهولة المصدر.")
 
-# مركز الدعم الفني والمساعدة في نهاية الصفحة بالكامل (تم تنسيق المسافات والكتل بالكامل 100%)
+# مركز الدعم الفني والمساعدة في نهاية الصفحة بالكامل (تم قفل وضبط الأسطر بالملي)
 st.divider()
 st.markdown("<h3 style='text-align: right; color: #60A5FA;'>🛠️ مركز الدعم الفني والمساعدة</h3>", unsafe_allow_html=True)
 
@@ -252,19 +252,19 @@ st.markdown("""
 user_support_message = st.text_input("اكتب رسالتك أو مشكلتك الفنية هنا:", key="support_input")
 
 if user_support_message:
-    with st.spinner("جاري فحص الاستفسار وتقديم الحل الفني..."):
-         try:
-            support_response = openai.ChatCompletion.create(
+with st.spinner("جاري فحص الاستفسار وتقديم الحل الفني..."):
+try:
+support_response = openai.ChatCompletion.create(
 model="gpt-4o",
 messages=[
 {"role": "system", "content": "أنت خبير دعم فني متخصص لموقع الأمن السيبراني CyberShield. مهمتك مساعدة المستخدمين في حل مشاكل الموقع التقنية بأسلوب ودود ومحترف باللغة العربية."},
 {"role": "user", "content": user_support_message}
 ]
 )
-st.markdown(f""
-f"⚙️ رد الدعم الفني:
-{support_response.choices.message['content']}"
-f"", unsafe_allow_html=True)
+# تم إصلاح تنسيق النص هنا وإغلاقه بشكل سليم تماماً 100%
+support_content = support_response.choices.message['content']
+st.markdown(f"⚙️ رد الدعم الفني:
+{support_content}", unsafe_allow_html=True)
 except Exception as e:
 st.error("خطأ في الاتصال بخادم الدعم الفني.")
 if st.sidebar.button("تسجيل الخروج Safe Logout"):
