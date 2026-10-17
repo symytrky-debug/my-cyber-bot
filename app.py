@@ -221,7 +221,7 @@ if show_m:
             st.error("خطأ في الاتصال بخدمة التحليل.")
 
 if show_v:
-    st.subheader("⚙️ تقرير الثغرات الأمنية M المكتشفة في النظام")
+    st.subheader("⚙️ تقرير الثغرات الأمنية المكتشفة في النظام")
     with st.spinner("جاري مطابقة إصدار المتصفح بقاعدة بيانات الثغرات CVE..."):
         try:
             response = openai.ChatCompletion.create(
@@ -256,3 +256,16 @@ if user_support_message:
         try:
             support_response = openai.ChatCompletion.create(
                 model="gpt-4o",
+messages=[
+{"role": "system", "content": "أنت خبير دعم فني متخصص لموقع الأمن السيبراني CyberShield. مهمتك مساعدة المستخدمين في حل مشاكل الموقع التقنية بأسلوب ودود ومحترف باللغة العربية."}
+]
+)
+st.markdown(f""
+f"⚙️ رد الدعم الفني:
+{support_response.choices.message['content']}"
+f"", unsafe_allow_html=True)
+except Exception as e:
+st.error("خطأ في الاتصال بخادم الدعم الفني.")
+if st.sidebar.button("تسجيل الخروج Safe Logout"):
+st.session_state["authenticated"] = False
+st.rerun()
