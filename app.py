@@ -275,7 +275,7 @@ if show_m:
 {"role": "user", "content": "درجتي هي 90 من 100. كيف أعرف إن كان هناك فيروسات قريبة تحاول اختراقي عبر الشبكة؟"}
 ]
 )
-try:
+try
         response = openai.ChatCompletion.create(
             model="gpt-4o",
             messages=[
