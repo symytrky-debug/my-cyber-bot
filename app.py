@@ -275,7 +275,17 @@ if show_m:
 {"role": "user", "content": "درجتي هي 90 من 100. كيف أعرف إن كان هناك فيروسات قريبة تحاول اختراقي عبر الشبكة؟"}
 ]
 )
-st.info(response.choices[0].message['content'])
+try:
+        response = openai.ChatCompletion.create(
+            model="gpt-4o",
+            messages=[
+                {"role": "system", "content": "..."},
+                {"role": "user", "content": "..."}
+            ]
+        )
+        st.info(response.choices[0].message['content'])
+    except Exception as e:
+        st.error("خطأ في الاتصال بخدمة التحليل.")
 except Exception as e:
 st.error("خطأ في الاتصال بخدمة التحليل.")
 if show_v:
