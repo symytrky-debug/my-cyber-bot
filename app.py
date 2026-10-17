@@ -27,8 +27,8 @@ if not st.session_state["authenticated"]:
 # جلب مفتاح الـ API بشكل آمن من إعدادات المنصة المخفية
 openai.api_key = st.secrets.get("OPENAI_API_KEY", "YOUR_BACKUP_KEY")
 
-st.markdown("<h1 style='text-align: center; color: #0F172A;'>🛡️ CyberShield AI v2.0</h1>", unsafe_allow_layout=True)
-st.markdown("<p style='text-align: center;'>لوحة التحكم الخاصة بمحاربة التهديدات الرقمية وفحص الثغرات</p>", unsafe_allow_layout=True)
+st.markdown("<h1 style='text-align: center; color: #0F172A;'>🛡️ CyberShield AI v2.0</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center;'>لوحة التحكم الخاصة بمحاربة التهديدات الرقمية وفحص الثغرات</p>", unsafe_allow_html=True)
 
 # المقاييس والدوائر الثلاث (تفاعلية من 100)
 col1, col2, col3 = st.columns(3)
@@ -36,21 +36,21 @@ with col1:
     st.markdown("<div style='text-align: center; border: 2px solid #10B981; padding: 20px; border-radius: 12px; background-color: #F0FDF4;'>"
                 "<h3>🛡️ مؤشر الحماية العامة</h3>"
                 "<h1 style='color: #10B981;'>85 / 100</h1>"
-                "</div>", unsafe_allow_layout=True)
+                "</div>", unsafe_allow_html=True)
     show_p = st.button("📋 عرض تقرير الحماية الكامل", use_container_width=True)
 
 with col2:
     st.markdown("<div style='text-align: center; border: 2px solid #3B82F6; padding: 20px; border-radius: 12px; background-color: #EFF6FF;'>"
                 "<h3>🦠 خلو الجهاز من الفيروسات</h3>"
                 "<h1 style='color: #3B82F6;'>90 / 100</h1>"
-                "</div>", unsafe_allow_layout=True)
+                "</div>", unsafe_allow_html=True)
     show_m = st.button("🔍 هل توجد فيروسات بالقرب مني؟", use_container_width=True)
 
 with col3:
     st.markdown("<div style='text-align: center; border: 2px solid #F59E0B; padding: 20px; border-radius: 12px; background-color: #FFFBEB;'>"
                 "<h3>⚠️ فحص الثغرات والتحديثات</h3>"
                 "<h1 style='color: #F59E0B;'>75 / 100</h1>"
-                "</div>", unsafe_allow_layout=True)
+                "</div>", unsafe_allow_html=True)
     show_v = st.button("💻 هل نظامي يحتاج تحديث أمني؟", use_container_width=True)
 
 st.divider()
