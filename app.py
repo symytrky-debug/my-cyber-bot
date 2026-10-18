@@ -276,8 +276,7 @@ if show_m:
 ]
 )
 try:
-    response = st.session_state.openai_client.chat.completions.create(
-    )
+    response = st.session_state.openai_client.chat.completions.create
         model="gpt-4o",
         messages=[
             {"role": "system", "content": "..."},
