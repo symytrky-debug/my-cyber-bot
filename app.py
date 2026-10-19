@@ -4,7 +4,7 @@ import openai
 # إعدادات واجهة الموقع والسمة اللمسية (التدرج الأزرق)
 st.set_page_config(page_title="CyberShield Premium", page_icon="🛡️", layout="wide")
 
-# كود CSS المحدث لتعديل لون الخانات وجعلها بلون أزرق محايد ومختلف عن الخلفية
+# كود CSS لتنسيق الواجهة والخلفيات والخانات
 st.markdown("""
     <style>
     /* الخلفية الخارجية المتدرجة لموقع كلاس لايت */
@@ -42,19 +42,28 @@ st.markdown("""
         border-color: #93C5FD;
         box-shadow: 0px 0px 10px #3B82F6;
     }
-    /* تعديل خانات الإدخال لتصبح بلون أزرق محايد ومتباين ومختلف عن الخلفية الخارجية */
+    /* تعديل خانات الإدخال لتصبح بلون أزرق محايد ومختلف عن الخلفية الخارجية */
     input {
-        background-color: #1E293B !important; /* أزرق محايد داكن ومختلف */
-        color: #FFFFFF !important; /* خط أبيض واضح بداخلها */
-        border: 1px solid #475569 !important; /* حدود بلون سيبراني متناسق */
+        background-color: #1E293B !important; 
+        color: #FFFFFF !important; 
+        border: 1px solid #475569 !important; 
         border-radius: 8px !important;
     }
-    /* لتعديل خلفية خانة رفع الملفات أيضاً لتتناسق مع الخانات المحايدة */
+    /* لتعديل خلفية خانة رفع الملفات */
     .stFileUploader {
         background-color: #1E293B !important;
         padding: 10px;
         border-radius: 12px;
         border: 1px dashed #475569;
+    }
+    /* تنسيق صندوق رسالة الترحيب للدعم الفني */
+    .support-welcome {
+        background-color: #1E293B;
+        border-right: 5px solid #3B82F6;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        color: #F0F9FF;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -89,7 +98,7 @@ st.markdown("<p class='custom-subtitle'>لوحة التحكم الخاصة بم�
 col1, col2, col3 = st.columns(3)
 with col1:
     st.markdown("<div style='text-align: center; border: 2px solid #60A5FA; padding: 20px; border-radius: 12px; background: linear-gradient(180deg, #1E293B 0%, #0F172A 100%); box-shadow: 0 4px 6px rgba(0,0,0,0.3);'>"
-                "<h3 style='color: #60A5FA;'>🛡️ مؤشر الحماية العامة</h3>"
+                "<h3 style='color: #60A5FA;'>🛡️ مؤشن الحماية العامة</h3>"
                 "<h1 style='color: #38BDF8;'>85 / 100</h1>"
                 "</div>", unsafe_allow_html=True)
     show_p = st.button("📋 عرض تقرير الحماية الكامل", use_container_width=True)
@@ -110,7 +119,7 @@ with col3:
 
 st.divider()
 
-# مركز فحص الملفات والأكواد المشبوهة (يحتوي على خانة إدخال محايدة أيضاً)
+# مركز فحص الملفات والأكواد المشبوهة
 st.subheader("📁 مركز تحليل الملفات والأكواد المشبوهة")
 uploaded_file = st.file_uploader("ارفع ملفاً، كود برمجياً، أو نص رسالة مشبوهة لتحليلها بالذكاء الاصطناعي:", type=["txt", "py", "js", "html", "exe"])
 
@@ -161,6 +170,37 @@ if show_p:
     st.subheader("📊 ملخص الحماية والخطوات القادمة")
     st.success("حالة النظام العامة مستقرة. لرفع النسبة إلى 100% يُنصح بتحديث المتصفح فوراً، وتجنب تشغيل ملفات مجهولة المصدر.")
 
+# --- القسم الجديد المضاف: قسم الدعم الفني في نهاية الصفحة بالكامل ---
+st.divider()
+st.markdown("<h3 style='text-align: right; color: #60A5FA;'>🛠️ مركز الدعم الفني والمساعدة</h3>", unsafe_allow_html=True)
+
+# عرض رسالة ترحيب الذكاء الاصطناعي المطلوبة بالضبط داخل الصندوق المحايد الأزرق
+st.markdown("""
+    <div class='support-welcome'>
+        🤖 <b>مساعد الدعم الفني:</b> أهلًا بك!💙نرحب بك في الدعم الفني، فضلًا وضح لنا مشكلتك او استفسارك لنتمكن من مساعدتك بأفضل طريقة ممكنة.
+    </div>
+""", unsafe_allow_html=True)
+
+# خانة المراسلة (أزرق محايد ومختلف عن الخلفية)
+user_support_message = st.text_input("اكتب رسالتك أو مشكلتك الفنية هنا:", key="support_input")
+
+if user_support_message:
+    with st.spinner("جاري فحص الاستفسار وتقديم الحل الفني..."):
+        try:
+            support_response = openai.ChatCompletion.create(
+                model="gpt-4o",
+                messages=[
+                    {"role": "system", "content": "أنت خبير دعم فني متخصص لموقع الأمن السيبراني CyberShield. مهمتك مساعدة المستخدمين في حل مشاكل الموقع، مشاكل رفع الملفات، مشاكل كلمات المرور، أو أي مشكلة تقنية يواجهونها داخل التطبيق بأسلوب ودود ومحترف وباللغة العربية."},
+                    {"role": "user", "content": user_support_message}
+                ]
+            )
+            st.markdown(f"<div style='background-color: #0F172A; padding: 15px; border-radius: 8px; border: 1px solid #2563EB; margin-top: 10px;'>"
+                        f"⚙️ <b>رد الدعم الفني:</b><br>{support_response.choices.message['content']}"
+                        f"</div>", unsafe_allow_html=True)
+        except:
+            st.error("خطأ في الاتصال بخادم الدعم الفني.")
+
+# زر تسجيل الخروج لحفظ الخصوصية
 if st.sidebar.button("تسجيل الخروج Safe Logout"):
     st.session_state["authenticated"] = False
     st.rerun()
